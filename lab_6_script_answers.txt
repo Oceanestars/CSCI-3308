@@ -1,0 +1,90 @@
+Name:Oceane Andreis
+Partner's Name: Abigail Nay , Asmita Dhakal 
+
+
+PART 4: 
+
+Question 1:
+
+DROP TABLE Uni;
+
+CREATE TABLE Uni(
+  University_Name VARCHAR(50) PRIMARY KEY,            
+  Date_Established INT NOT NULL,  
+  Address VARCHAR(200),             
+  Student_Population INT NOT NULL,		     
+  Acceptance_Rate FLOAT(8);             
+
+Question 2:
+
+INSERT INTO Uni (University_Name, Date_Established, Address,Student_Population,Acceptance_Rate)
+VALUES('CU Boulder', 1876, '1100 28th St, Boulder, CO 80303',35000,0.8);
+
+PART 5:
+
+Question 1:
+
+SELECT name, major FROM football_players 
+ORDER BY major ASC;
+
+Question 2:
+
+SELECT name, rushing_yards FROM football_players WHERE rushing_yards >70 ORDER BY rushing_yards ASC;
+
+Question 3:
+
+SELECT * FROM football_games WHERE (visitor_name = 'Nebraska');
+
+Question 4:
+
+SELECT * FROM football_games WHERE (home_score > visitor_score);
+
+Question 5:
+
+SELECT visitor_name, game_date  FROM football_games WHERE game_date > CURRENT_DATE - INTERVAL '15 months';
+
+Question 6:
+
+ SELECT AVG(home_score) AS "avg" FROM football_games;
+(Don't need the AS "avg")
+
+Question 7:
+
+SELECT major, COUNT(major) AS number_of_players FROM football_players GROUP BY major;
+
+Question 8:
+
+SELECT major, COUNT(major) AS number_of_players FROM football_players WHERE (major = 'CSCI') GROUP BY major;
+
+PART 6:
+
+Question 1:
+
+CREATE VIEW wins AS
+ SELECT COUNT(football_games) 
+ FROM football_games
+ WHERE (home_score > visitor_score);
+
+Question 2:
+
+CREATE VIEW total AS
+ SELECT COUNT(football_games) 
+ FROM football_games;
+
+Question 3:
+
+SELECT (CAST(wins.count as real)/CAST(total.count as real)*100) FROM wins, total;
+
+CAST (...)
+Our math operations will try to perserve the data type of the columns being used. This means if our operation works with whole numbers, then our answer will be a whole number. To work around this, we can use CAST() to treat one of our values as a float, which will result in a decimal number for our answer!
+
+PART 7:
+
+Question 1:
+
+SELECT COUNT(*) FROM football_games WHERE (SELECT id FROM football_players WHERE name = 'Cedric Vega') = any(players);
+ 
+
+Question 2:
+
+SELECT CAST(p.rushing_yards AS float) AS "Average Rushing Yards" FROM (SELECT (SELECT rushing_yards FROM football_players WHERE name = 'Cedric Vega') AS rushing_yards, (SELECT COUNT(*) FROM football_games WHERE 1 = ANY(players)) AS games_played)p;
