@@ -1,0 +1,32 @@
+/*@import url('https://fonts.googleapis.com/css?family=Amatic+SC');*/
+/*https://www.w3schools.com/howto/howto_css_social_media_buttons.asp*/
+
+header{
+  width: 100%;
+  font-family: helvetica;
+}
+
+h1, h2{
+text-decoration: underline;
+
+}
+
+
+table, th, td {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+}
+
+body {
+  width:100%; /*The container will try to fill the entire browser window width*/
+
+  font-family: helvetica;
+
+
+
+}
